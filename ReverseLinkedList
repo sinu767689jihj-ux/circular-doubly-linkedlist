@@ -1,0 +1,56 @@
+#include<stdio.h>
+#include<stdlib.h>
+struct Node
+{
+    int data;
+    struct Node*next;
+}*temp,*head=NULL,*pretemp=NULL,*aftertemp;
+// main function
+int main()
+{
+    int value;
+    char ch;
+    do{
+        struct Node* new=(struct Node*)malloc(sizeof(struct Node));
+        printf("Enter a value:");
+        scanf("%d",&value);
+        new->data=value;
+        new->next=NULL;
+        if(head==NULL)
+        {
+            head=new;
+            temp=new;
+        }else{
+            temp->next=new;
+            temp=new;
+        }
+        printf("Do you want to add one more nose?(y/n):");
+        scanf(" %c",&ch);
+    }while(ch=='y');
+    printf("Display List:");
+    temp=head;
+    while(temp!=NULL)
+    {
+        printf("%d\t",temp->data);
+        temp=temp->next;
+    }
+    printf("\nREVERSING LIST:\n");
+    temp=head;
+    aftertemp=temp;
+    while(aftertemp!=NULL)
+    {
+        aftertemp=aftertemp->next;
+        temp->next=pretemp;
+        pretemp=temp;
+        temp=aftertemp;
+    }
+    head=pretemp;
+    printf("REVERSE LIST:");
+    pretemp=head;
+    while(pretemp!=NULL)
+    {
+        printf("%d\t",pretemp->data);
+        pretemp=pretemp->next;
+    }
+    return 0;
+}
